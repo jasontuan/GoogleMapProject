@@ -24,8 +24,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         DialogLoadingFragment.getInstance().show(getSupportFragmentManager(), ConstValue.TAG);
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
@@ -38,17 +36,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.setInfoWindowAdapter(new CustomInfoMarker(this));
+        mMap.setInfoWindowAdapter(new CustomInfoMarker(this, mMap));
 
     }
 
-    private void setMarker(Marker marker) {
-        mMap.addMarker(new MarkerOptions()
-                .position(marker.getPosition())
-                .title(marker.getTitle())
-                .icon(BitmapDescriptorFactory.fromBitmap(CustomMarkerBitmap.newInstance().convertDrawable(this)))).showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), ConstValue.DEFAULT_ZOOM));
-    }
 }
