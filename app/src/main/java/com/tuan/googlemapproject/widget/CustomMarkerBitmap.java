@@ -1,10 +1,11 @@
-package com.tuan.googlemapproject;
+package com.tuan.googlemapproject.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+
+import com.tuan.googlemapproject.R;
 
 public class CustomMarkerBitmap {
 
@@ -14,7 +15,8 @@ public class CustomMarkerBitmap {
         return customMarkerBitMap;
     }
 
-    public Bitmap convertDrawable(Drawable drawable) {
+    public Bitmap convertDrawable(Context context) {
+        Drawable drawable = context.getDrawable(R.drawable.icon_circle);
         int width = 40;
         int height = 40;
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);

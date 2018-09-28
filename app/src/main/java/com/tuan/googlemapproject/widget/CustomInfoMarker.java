@@ -1,4 +1,4 @@
-package com.tuan.googlemapproject;
+package com.tuan.googlemapproject.widget;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
+import com.tuan.googlemapproject.R;
 
 public class CustomInfoMarker implements GoogleMap.InfoWindowAdapter {
 
