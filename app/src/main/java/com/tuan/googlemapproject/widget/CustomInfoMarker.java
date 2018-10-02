@@ -1,6 +1,7 @@
 package com.tuan.googlemapproject.widget;
 
 import android.content.Context;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuan.googlemapproject.R;
@@ -15,13 +17,9 @@ import com.tuan.googlemapproject.constant.ConstValue;
 
 public class CustomInfoMarker implements GoogleMap.InfoWindowAdapter {
 
-    private Context context;
-    private GoogleMap mMap;
     private View view;
 
-    public CustomInfoMarker(Context context, GoogleMap mMap) {
-        this.context = context;
-        this.mMap = mMap;
+    public CustomInfoMarker(Context context) {
         this.view = LayoutInflater.from(context).inflate(R.layout.item_marker, null);
     }
 
@@ -30,25 +28,15 @@ public class CustomInfoMarker implements GoogleMap.InfoWindowAdapter {
         tvMessage.setText(marker.getTitle());
     }
 
-    private void setMarker(Marker marker) {
-        mMap.addMarker(new MarkerOptions()
-                .position(marker.getPosition())
-                .title(marker.getTitle())
-                .icon(BitmapDescriptorFactory.fromBitmap(CustomMarkerBitmap.newInstance().convertDrawable(context)))).showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), ConstValue.DEFAULT_ZOOM));
-    }
-
     @Override
     public View getInfoWindow(Marker marker) {
         customInfoMarker(marker);
-        setMarker(marker);
         return view;
     }
 
     @Override
     public View getInfoContents(Marker marker) {
         customInfoMarker(marker);
-        setMarker(marker);
         return view;
     }
 }

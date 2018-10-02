@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,5 +40,23 @@ public class DialogLoadingFragment extends DialogFragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
+    }
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        if (dialog.isAdded()) {
+            return;
+        } else {
+            super.show(manager, tag);
+        }
+    }
+
+    @Override
+    public void dismiss() {
+        if (dialog.isAdded()) {
+            super.dismiss();
+        } else {
+            return;
+        }
     }
 }
